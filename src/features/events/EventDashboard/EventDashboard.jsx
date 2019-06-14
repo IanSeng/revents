@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Button } from "semantic-ui-react";
 import EventList from "../EventList/EventList";
 import EventForm from "../EventForm/EventForm";
+import cuid from "cuid";
 
 const eventFromDashboard = [
   {
@@ -56,16 +57,26 @@ const eventFromDashboard = [
 
 class EventDashboard extends Component {
   state = {
-      events: eventFromDashboard,
+    events: eventFromDashboard,
+    isOpen: false
+  };
+
+  handleCreateEvent = newEvent => {
+    newEvent.id = cuid();
+    newEvent.hostPhotoURL = "/assets/user.png";
+    this.setState(({ events }) => ({
+      //we want to add new event to existing event, we can use spread operator
+      events: [...events, newEvent], //it will take the existing and new to replace events
       isOpen: false
-    };
+    })); //we also need to use previous state events that why we do ({events}) =>
+  };
 
-
-  handleIsOpenToogle = () => { // this is an arrow function
-    this.setState(({isOpen}) => ({
-      isOpen: !isOpen //isOpen is the opposite of isOpen the previous state is also an object 
-    }))
-  }
+  handleIsOpenToogle = () => {
+    // this is an arrow function
+    this.setState(({ isOpen }) => ({
+      isOpen: !isOpen //isOpen is the opposite of isOpen the previous state is also an object
+    }));
+  };
   render() {
     return (
       <div>
@@ -75,8 +86,17 @@ class EventDashboard extends Component {
             <EventList events={this.state.events} />
           </Grid.Column>
           <Grid.Column width={6}>
-            <Button onClick={this.handleIsOpenToogle} positive content='Create Event' />
-            {this.state.isOpen && <EventForm cancelFormOpen={this.handleIsOpenToogle}/>}
+            <Button
+              onClick={this.handleIsOpenToogle}
+              positive
+              content='Create Event'
+            />
+            {this.state.isOpen && (
+              <EventForm
+                createEvent={this.handleCreateEvent}
+                cancelFormOpen={this.handleIsOpenToogle}
+              />
+            )}
           </Grid.Column>
         </Grid>
       </div>

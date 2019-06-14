@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container } from "semantic-ui-react";
 import EventDashboard from "../../features/events/EventDashboard/EventDashboard";
 import NavBar from "../../features/nav/NavBar/NavBar";
@@ -6,12 +6,12 @@ import NavBar from "../../features/nav/NavBar/NavBar";
 class App extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
         <NavBar />
-        <Container className='main'>
+        <Container className='main'> {/*container need a className*/} 
           <EventDashboard />
         </Container>
-      </div>
+      </Fragment>
     );
   }
 }
