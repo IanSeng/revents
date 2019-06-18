@@ -9,10 +9,23 @@ class EventForm extends Component {
     venue: "",
     hostedBy: ""
   };
+
+  componentDidMount() {
+    if (this.props.selectedEvent !== null) {
+      this.setState({
+        ...this.props.selectedEvent // use dot operator ... to take all of the individual properties of the object
+      });
+    }
+  }
+
   handleFormSubmit = evt => {
     evt.preventDefault();
     //console.log(this.state); //for debug use
-    this.props.createEvent(this.state);
+    if (this.state.id) {
+      this.props.updateEvent(this.state);
+    } else {
+      this.props.createEvent(this.state);
+    }
   };
   //we use this initially but because evt is an object, so we can distructure the target
   //it is not necessary but it looks cleaner
