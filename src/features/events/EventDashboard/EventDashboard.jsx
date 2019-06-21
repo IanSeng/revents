@@ -91,6 +91,7 @@ class EventDashboard extends Component {
       isOpen: false
     });
   };
+  
   handleselectEvent = event => {
     //console.log(event);
     this.setState({
