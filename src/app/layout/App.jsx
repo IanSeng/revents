@@ -24,12 +24,12 @@ class App extends Component {
               <Container className='main'>
                 {" "}
                 {/*container need a className*/}
-                <Route path='/events' component={EventDashboard} />
+                <Route exact path='/events' component={EventDashboard} />
                 <Route path='/events/:id' component={EventDetailedPage} />
                 <Route path='/people' component={PeopleDashboard} />
                 <Route path='/profile:id' component={UserDetailedPage} />
                 <Route path='/settings' component={SettingsDashboard} />
-                <Route path='/createEvent' component={EventForm} />
+                <Route path={['/createEvent','/manage/:id']} component={EventForm} />
                 <Route path='/test' component={TestComponent} />
               </Container>
             </Fragment>
