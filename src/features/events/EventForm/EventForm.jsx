@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Segment, Form, Button } from "semantic-ui-react";
 import {connect} from 'react-redux'
+import {createEvent, updateEvent} from '../eventActions';
+import cuid from 'cuid';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -22,6 +24,9 @@ const mapState = (state, ownProps) => {
   }
 }
 
+const actions = {
+  createEvent, updateEvent
+}
 class EventForm extends Component {
   state = {...this.props.event};
 
@@ -38,8 +43,15 @@ class EventForm extends Component {
     //console.log(this.state); //for debug use
     if (this.state.id) {
       this.props.updateEvent(this.state);
+      this.props.history.push('/events/'+this.state.id);
     } else {
-      this.props.createEvent(this.state);
+      const newEvent ={
+        ...this.state,
+        id: cuid(), //we dont use equal inside an object 
+        hostPhotoURL : "/assets/user.png"
+      }
+      this.props.createEvent(newEvent);
+      this.props.history.push('/events');
     }
   };
   //we use this initially but because evt is an object, so we can distructure the target
@@ -120,4 +132,4 @@ class EventForm extends Component {
   }
 }
 
-export default connect(mapState) (EventForm);
+export default connect(mapState, actions)(EventForm);

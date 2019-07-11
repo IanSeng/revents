@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect } from 'react-redux'
+import {connect} from 'react-redux'
 import { Grid } from 'semantic-ui-react'
 import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
