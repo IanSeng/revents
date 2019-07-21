@@ -46,7 +46,7 @@ class TestComponent extends Component {
         <br />
         <br />
         <TestPlaceInput getLatLng={this.handleChangeLatLng} />
-        <SimpleMap myLatLng={this.state.myLatLng} />
+        <SimpleMap key={this.state.myLatLng.lng} myLatLng={this.state.myLatLng} /> 
       </div>
     );
   }

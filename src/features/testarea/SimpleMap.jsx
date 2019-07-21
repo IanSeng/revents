@@ -7,10 +7,6 @@ const AnyReactComponent = () => <Icon name='marker' size='big' color='red'/>;
 class SimpleMap extends Component {
 
   static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
     zoom: 11
   };
 
@@ -24,7 +20,7 @@ class SimpleMap extends Component {
       <div style={{ height: '300px', width: '100%' }}>
         <GoogleMapReact 
           bootstrapURLKeys={{ key: "AIzaSyDO9C7eoW5gYSaSBK_KxDYZ2d0Vlw2Dqbc" }}
-          center= {myLatLng}
+          defaultCenter= {myLatLng}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
