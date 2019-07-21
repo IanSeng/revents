@@ -27,7 +27,7 @@ class TestPlaceInput extends React.Component {
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
-        onSelect={()=> getLatLng(this.state.address)}
+        onSelect={getLatLng}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>

@@ -28,7 +28,6 @@ class SimpleMap extends Component {
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
-            
             lat={myLatLng.lat}
             lng={myLatLng.lng}
           />
