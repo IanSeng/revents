@@ -3,6 +3,11 @@ import {connect} from 'react-redux'
 import {incrementCounter, decrementCounter} from './testAction'
 import {Button} from 'semantic-ui-react'
 import TestPlaceInput from './TestPlaceInput';
+import SimpleMap from './SimpleMap';
+import  {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
 
 const mapStateToProps = (state) => ({ //state is from testReducer.js 
     data: state.test.data
@@ -13,7 +18,25 @@ const action = {
     decrementCounter
 }
 
+
 class TestComponent extends Component {
+    state = {
+        myLatLng: {
+            lat: 59.95,
+            lng: 30.33
+        }
+        
+    }
+    
+    handleChangeLatLng = address => {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      //.then(latLng => console.log('Success', latLng))
+      .then(latLng => this.setState({
+          myLatLng: latLng
+      })) 
+      .catch(error => console.error('Error', error));
+    }
     render() {
         const {data, incrementCounter, decrementCounter} = this.props;
         return (
@@ -24,7 +47,8 @@ class TestComponent extends Component {
                 <Button onClick={decrementCounter} negative content='Decrement'/>
                 <br></br>
                 <br></br>
-                <TestPlaceInput></TestPlaceInput>
+                <TestPlaceInput getLatLng={this.handleChangeLatLng} ></TestPlaceInput>
+                <SimpleMap myLatLng={this.state.myLatLng}></SimpleMap>
             </div>
         )
     }
