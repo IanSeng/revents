@@ -66,7 +66,7 @@ class EventForm extends Component {
       venueLatLng: {}
   }
   onFormSubmit = values => {
-    values.venueLatlng = this.state.venueLatLng;
+    values.venueLatLng = this.state.venueLatLng;
     if (this.props.initialValues.id) {
       this.props.updateEvent(values);
       this.props.history.push("/events/" + this.props.initialValues.id);
