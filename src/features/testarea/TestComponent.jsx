@@ -5,6 +5,7 @@ import { Button } from "semantic-ui-react";
 import TestPlaceInput from "./TestPlaceInput";
 import SimpleMap from "./SimpleMap";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { openModal } from "../modals/modalActions";
 
 const mapStateToProps = state => ({
   //state is from testReducer.js
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
 
 const action = {
   incrementCounter,
-  decrementCounter
+  decrementCounter,
+  openModal
 };
 
 class TestComponent extends Component {
@@ -30,23 +32,31 @@ class TestComponent extends Component {
       //.then(latLng => console.log('Success', latLng))
       .then(latLng => {
         this.setState({
-            myLatLng: latLng
-          })
-     })
+          myLatLng: latLng
+        });
+      })
       .catch(error => console.error("Error", error));
   };
   render() {
-    const { data, incrementCounter, decrementCounter } = this.props;
+    const { data, incrementCounter, decrementCounter, openModal } = this.props;
     return (
       <div>
         <h1>Test Component</h1>
         <h3>The answer is : {data}</h3>
         <Button onClick={incrementCounter} positive content='Increment' />
         <Button onClick={decrementCounter} negative content='Decrement' />
+        <Button
+          onClick={() => openModal("TestModal", { data: 42 })}
+          color='teal'
+          content='Open Modal'
+        />
         <br />
         <br />
         <TestPlaceInput getLatLng={this.handleChangeLatLng} />
-        <SimpleMap key={this.state.myLatLng.lng} myLatLng={this.state.myLatLng} /> 
+        <SimpleMap
+          key={this.state.myLatLng.lng}
+          myLatLng={this.state.myLatLng}
+        />
       </div>
     );
   }
