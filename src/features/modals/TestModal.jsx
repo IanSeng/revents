@@ -20,4 +20,4 @@ const TestModal = ({closeModal}) => {
   );
 };
 
-export default connect(null, actions)(TestModal);
+export default connect(null, actions)(TestModal); //We are not passing map state to prop, the second parameter is action
