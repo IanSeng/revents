@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import EventListAttendee from "./EventListAttendee";
 import { Link } from "react-router-dom";
+import { format, parseISO } from "date-fns";
 class EventListItem extends Component {
   render() {
-    const { event , deleteEvent } = this.props;
+    const { event, deleteEvent } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -20,7 +21,8 @@ class EventListItem extends Component {
         </Segment>
         <Segment>
           <span>
-            <Icon name='clock' /> {event.date} |
+            <Icon name='clock' /> {format(parseISO(event.date), "EEEE do LLL")} at {""}
+            {format(parseISO(event.date), "h:mm a")}|
             <Icon name='marker' /> {event.venue}
           </span>
         </Segment>
@@ -43,9 +45,9 @@ class EventListItem extends Component {
           />
           <Button
             //onClick={() => selectEvent(event)} //arrow function so that it is not immediately execute when we render the comporent, this is to handle methods that we need to pass parameters out
-            
+
             as={Link}
-            to={'/events/'+event.id}
+            to={"/events/" + event.id}
             color='teal'
             floated='right'
             content='View'

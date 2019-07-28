@@ -35,7 +35,7 @@ class EventDashboard extends Component {
   };
   render() {
     const { events, loading } = this.props;
-    console.log(loading)
+  
     if (loading) return <LoadingComponent/>
     
     return (
