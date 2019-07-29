@@ -50,6 +50,7 @@ class EventDashboard extends Component {
             />
           </Grid.Column>
           <Grid.Column width={6}>
+            <h2>Event Activity</h2>
             <EventActivity></EventActivity>
           </Grid.Column>
         </Grid>
